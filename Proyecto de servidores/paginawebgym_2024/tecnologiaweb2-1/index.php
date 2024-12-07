@@ -1,5 +1,6 @@
 <?php
-session_start();
+session_start(); // Iniciar sesión
+echo "Bienvenido a Gym Salud y Vida";
 require_once 'conexion.php';
 
 function login($username, $password, $pdo) {
@@ -7,7 +8,9 @@ function login($username, $password, $pdo) {
     $stmt = $pdo->prepare($query);
     $stmt->execute(array(':username' => $username));
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
     if ($user) {
+        // Verificar la contraseña usando password_verify para la seguridad
         if (password_verify($password, $user['password'])) {
             return $user; // Retornar los datos del usuario si el login es exitoso
         }
@@ -16,12 +19,16 @@ function login($username, $password, $pdo) {
 }
 
 if (isset($_POST['login'])) {
+    // Limpiar y validar los datos de entrada
     $username = htmlspecialchars(trim($_POST['username']));
     $password = trim($_POST['password']);
+
     if (empty($username) || empty($password)) {
         echo "<script>alert('Por favor, ingrese usuario y contraseña');</script>";
     } else {
+        // Intentar el inicio de sesión
         $user = login($username, $password, $pdo);
+
         if ($user) {
             $_SESSION['user'] = $user['username']; // Guardar el nombre del usuario en la sesión
             header("Location: principal.php"); // Redirigir a la página principal
