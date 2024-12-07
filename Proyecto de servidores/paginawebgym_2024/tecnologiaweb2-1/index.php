@@ -1,7 +1,7 @@
 <?php
 session_start();
-echo "Bienvenido a Gym Salud y Vida";
 require_once 'conexion.php';
+
 function login($username, $password, $pdo) {
     $query = "SELECT * FROM users WHERE username = :username";
     $stmt = $pdo->prepare($query);
@@ -14,6 +14,7 @@ function login($username, $password, $pdo) {
     }
     return false; // Si no se encuentra el usuario o la contraseña no coincide
 }
+
 if (isset($_POST['login'])) {
     $username = htmlspecialchars(trim($_POST['username']));
     $password = trim($_POST['password']);
@@ -94,3 +95,4 @@ if (isset($_POST['login'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
