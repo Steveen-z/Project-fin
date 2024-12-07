@@ -1,7 +1,6 @@
 <?php
 session_start(); // Iniciar sesión
 require_once 'conexion.php';
-echo "Bienvenido a Gym Salud y Vida";
 
 function login($username, $password, $pdo) {
     $query = "SELECT * FROM users WHERE username = :username";
@@ -10,7 +9,7 @@ function login($username, $password, $pdo) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        // Verificar la contraseña usando password_verify para la seguridad
+        // Verificar la contraseña usando password_verify para mayor seguridad
         if (password_verify($password, $user['password'])) {
             return $user; // Retornar los datos del usuario si el login es exitoso
         }
@@ -79,8 +78,9 @@ if (isset($_POST['login'])) {
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3 login-container">
+                <h1 class="text-center">Bienvenido a Gym Salud y Vida</h1>
                 <h2 class="text-center mb-4">Iniciar sesión</h2>
-                 <img src="login.png" width="400" height="200">
+                <img src="login.png" width="400" height="200">
                 <form action="" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Usuario</label>
@@ -102,4 +102,3 @@ if (isset($_POST['login'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
