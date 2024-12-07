@@ -1,13 +1,10 @@
 <?php
-$host = getenv('MYSQLHOST');  // Asegúrate de que esta variable de entorno esté bien configurada
-$port = getenv('MYSQLPORT');  // Asegúrate de que esta variable de entorno esté bien configurada
-$username = getenv('MYSQLUSER');  // Asegúrate de que esta variable de entorno esté bien configurada
-$password = getenv('MYSQLPASSWORD');  // Asegúrate de que esta variable de entorno esté bien configurada
-$dbname = getenv('MYSQLDATABASE');  // Asegúrate de que esta variable de entorno esté bien configurada
+// Obtener la URL completa de la base de datos desde la variable de entorno
+$dsn = getenv('MYSQL_URL');  // Ejemplo: mysql://root:password@hostname:port/database
 
 try {
-    // Intenta conectar con la base de datos usando las variables de entorno
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+    // Crear la conexión PDO utilizando la URL completa de la base de datos
+    $pdo = new PDO($dsn);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "Conexión exitosa a la base de datos.";  // Puedes dejar este echo para depuración
 } catch (PDOException $e) {
