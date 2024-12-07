@@ -1,6 +1,7 @@
 <?php
 session_start(); // Iniciar sesión
 require_once 'conexion.php';
+echo "Bienvenido a Gym Salud y Vida";
 
 function login($username, $password, $pdo) {
     $query = "SELECT * FROM users WHERE username = :username";
