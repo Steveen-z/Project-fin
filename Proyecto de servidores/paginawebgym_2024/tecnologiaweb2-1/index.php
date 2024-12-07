@@ -1,6 +1,5 @@
 <?php
 session_start(); // Iniciar sesión
-echo "Bienvenido a Gym Salud y Vida";
 require_once 'conexion.php';
 
 function login($username, $password, $pdo) {
